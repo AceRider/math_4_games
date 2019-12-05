@@ -9,6 +9,10 @@ TagManager:
   - CHARISMA
   - INTELLIGENCE
   - INVISIBLE
+  - ANTIMAGIC
+  - REMOVE
+  - ADD
+  - RESET
   layers:
   - Default
   - TransparentFX
