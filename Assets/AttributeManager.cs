@@ -6,61 +6,55 @@ using System;
 
 public class AttributeManager : MonoBehaviour
 {
-    static public int MAGIC = 16;
-    static public int INTELLIGENCE = 8;
-    static public int CHARISMA = 4;
-    static public int FLY = 2;
-    static public int INVISIBLE = 1;
-
+    static public int BLUEKEY = 4;
+    static public int REDKEY = 2;
+    static public int GREENKEY = 1;
 
     public Text attributeDisplay;
     public int attributes = 0;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "MAGIC")
+        if(other.gameObject.tag == "BLUE_KEY")
         {
-            attributes |= MAGIC;
+            attributes |= BLUEKEY;
+            Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "INTELLIGENCE")
+        else if (other.gameObject.tag == "RED_KEY")
         {
-            attributes |= INTELLIGENCE;
+            attributes |= REDKEY;
+            Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "CHARISMA")
+        else if (other.gameObject.tag == "GREEN_KEY")
         {
-            attributes |= CHARISMA;
+            attributes |= GREENKEY;
+            Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "FLY")
+        else if (other.gameObject.tag == "GOLD_KEY")
         {
-            attributes |= FLY;
+            attributes |= (BLUEKEY | REDKEY | GREENKEY);
+            Destroy(other.gameObject);
         }
-        else if (other.gameObject.tag == "INVISIBLE")
-        {
-            attributes |= INVISIBLE;
-        }
-        else if (other.gameObject.tag == "ANTIMAGIC")
-        {
-            attributes &= ~MAGIC;
-        }
-        else if (other.gameObject.tag == "REMOVE")
-        {
-            attributes &= ~ (INTELLIGENCE | MAGIC);
-        }
-        else if (other.gameObject.tag == "ADD")
-        {
-            attributes |= (INTELLIGENCE | MAGIC | CHARISMA);
-        }
-        else if (other.gameObject.tag == "RESET")
-        {
-            attributes = 0;
-        }
-
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        string A = "110111";
+        string B = "10001";
+        string C = "1101";
+        int aBits = Convert.ToInt32(A, 2);
+        int bBits = Convert.ToInt32(B, 2);
+        int cBits = Convert.ToInt32(C, 2);
+
+        int packed = 0;
+
+        packed = packed | (aBits << 28);
+        packed = packed | (bBits << 25);
+        packed = packed | (cBits << 20);
+
+        Debug.Log(Convert.ToString(packed, 2).PadLeft(32, '0'));
+
     }
 
     // Update is called once per frame
