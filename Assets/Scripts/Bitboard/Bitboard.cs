@@ -17,7 +17,7 @@ public class Bitboard : MonoBehaviour
         return (bitboard |= newBit);
     }
 
-    long GetCellState(long bitboard, int row, int col)
+    bool GetCellState(long bitboard, int row, int col)
     {
         long mask = 1L << (row * 8 + col);
 
